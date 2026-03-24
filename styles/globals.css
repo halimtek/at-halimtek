@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure sections have enough padding so they don't look cramped */
+section {
+  scroll-margin-top: 80px; /* This ensures the navbar doesn't cover the title when jumping */
+}
+
+:root {
+  --bg: #030712;
+}
+
+/* stunning text gradient without @apply errors */
+.text-gradient {
+  background: linear-gradient(to right, #60a5fa, #3b82f6, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-card:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Background glow effect */
+.bg-blob {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+
+@layer base {
+  :root {
+    --bg-primary: #f8fafc; /* Soft White-Blue */
+    --text-primary: #0f172a; /* Deep Navy */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.05);
+  }
+
+  .dark {
+    --bg-primary: #030712; /* Deep Black-Navy */
+    --text-primary: #f8fafc; /* Soft White */
+    --glass-bg: rgba(3, 7, 18, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.05);
+  }
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Stunning Glassmorphism updated for both modes */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.5rem;
+}
