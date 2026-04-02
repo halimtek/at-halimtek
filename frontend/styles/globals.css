@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    /* Light Mode - Clean Slate */
+    /* Light Mode Palette */
     --bg-primary: #f8fafc;
     --text-primary: #0f172a;
     --glass-bg: rgba(255, 255, 255, 0.7);
     --glass-border: rgba(0, 0, 0, 0.05);
-    --nav-height: 80px;
     --accent-blue: #2563eb;
+    --nav-height: 80px;
   }
 
   .dark {
-    /* Dark Mode - Deep Tech Navy */
+    /* Dark Mode Palette - Deep Tech Navy */
     --bg-primary: #030712;
     --text-primary: #f8fafc;
     --glass-bg: rgba(3, 7, 18, 0.7);
-    --glass-border: rgba(59, 130, 246, 0.1); /* Subtle blue glow */
+    --glass-border: rgba(59, 130, 246, 0.1);
   }
 
   html {
     scroll-behavior: smooth;
-    /* Prevents layout "jumping" when scrollbar appears */
+    /* Prevents "jumping" when scrollbars appear */
     scrollbar-gutter: stable;
   }
 
@@ -32,92 +32,79 @@
     color: var(--text-primary);
     transition: background-color 0.5s ease, color 0.5s ease;
     
-    /* CRITICAL FIX: 'clip' allows 'sticky' to function 
-       while still preventing horizontal overflow. 
-    */
+    /* CRITICAL: 'clip' allows 'sticky' to work while stopping horizontal scroll */
     overflow-x: clip; 
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     position: relative;
   }
 }
 
 @layer components {
-  /* --- Professional Glassmorphism --- */
+  /* --- Professional Glassmorphism 2.0 --- */
   .glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-radius: 1.5rem;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    @apply relative overflow-hidden rounded-[2.5rem] border border-[var(--glass-border)] 
+           bg-[var(--glass-bg)] backdrop-blur-2xl transition-all duration-700;
+  }
+
+  /* Subtle top-left light reflection */
+  .glass-card::before {
+    content: "";
+    @apply absolute inset-0 opacity-0 transition-opacity duration-700 pointer-events-none;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, transparent 40%);
   }
 
   .glass-card:hover {
-    border-color: rgba(37, 99, 235, 0.3);
-    transform: translateY(-4px);
+    @apply -translate-y-1;
+    border-color: rgba(59, 130, 246, 0.3);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .glass-card:hover::before {
+    @apply opacity-100;
   }
 
   /* --- Engineering Input Styles --- */
   .pro-input {
-    width: 100%;
-    padding: 0.85rem 1.25rem;
-    font-size: 0.875rem;
-    border-radius: 0.75rem;
-    background: rgba(128, 128, 128, 0.05);
-    border: 1px solid var(--glass-border);
-    color: inherit;
-    transition: all 0.3s ease;
-    outline: none;
+    @apply w-full p-4 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 
+           dark:border-white/10 text-sm transition-all duration-300 outline-none;
   }
 
   .pro-input:focus {
-    border-color: var(--accent-blue);
-    background: rgba(128, 128, 128, 0.08);
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-  }
-
-  /* --- Typography Utilities --- */
-  .text-gradient {
-    background: linear-gradient(to right, #60a5fa, #3b82f6, #6366f1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    @apply border-blue-600 bg-white dark:bg-white/10 ring-4 ring-blue-600/10;
   }
 
   .pro-label {
-    display: block;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: #64748b; /* slate-500 */
-    margin-bottom: 0.5rem;
-    padding-left: 0.25rem;
+    @apply block font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500 mb-2 pl-1;
+  }
+
+  /* --- Typography --- */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-600 to-indigo-500;
   }
 }
 
-/* --- Layout Refinements --- */
+/* --- Layout Refinements & Fixes --- */
 
-/* Ensures the Navbar doesn't cover section headers when jumping */
+/* Removes the "Boring Line" seam between Navbar and Body */
+nav {
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+nav.scrolled {
+  @apply border-b border-blue-500/10 shadow-lg shadow-blue-900/5;
+}
+
+/* Section Spacing Fix for Anchors */
 section {
   scroll-margin-top: var(--nav-height);
 }
 
-/* Fix for the "Boring White Line" - Smooth Navbar transition */
-nav.scrolled {
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
-}
-
-.dark nav.scrolled {
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 
-              0 1px 0 0 rgba(59, 130, 246, 0.05); /* Subtle glow instead of line */
-}
-
-/* Custom Scrollbar for the 'HalimTek' Aesthetic */
+/* Custom Scrollbar for HalimTek Branding */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -125,10 +112,15 @@ nav.scrolled {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 10px;
+  @apply bg-slate-300 dark:bg-slate-800 rounded-full hover:bg-blue-600 transition-colors;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-blue);
+/* Background Blobs Animation */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s infinite ease-in-out;
 }
