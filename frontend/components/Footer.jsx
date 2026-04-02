@@ -19,12 +19,13 @@ export default function Footer() {
         {/* Social Grid: Adapts text color */}
         <div className="grid grid-cols-2 md:grid-cols-6 gap-y-6 gap-x-12 mb-16 text-center">
           {[
-            { name: "LinkedIn", href: "https://linkedin.com/in/halimtek" },
-            { name: "Telegram", href: "https://t.me/at_halimtek" },
+            { name: "LinkedIn", href: "https://linkedin.com/in/company/halimtek" },
+            { name: "Telegram", href: "https://t.me/halimtekofficial" },
             { name: "GitHub", href: "https://github.com/halimtek" },
-            { name: "Instagram", href: "https://instagram.com/at.halimtek" },
-            { name: "TikTok", href: "https://tiktok.com/@at.halimtek" },
-            { name: "Facebook", href: "https://facebook.com/at.halimtek" },
+            { name: "Instagram", href: "https://instagram.com/halimtekofficial" },
+            { name: "TikTok", href: "https://tiktok.com/@halimtekofficial" },
+            { name: "Facebook", href: "https://facebook.com/halimtek" },
+            { name: "youtube", href:"https://youtube.com/@halimtekofficial"}
           ].map((link) => (
             <a 
               key={link.name}
