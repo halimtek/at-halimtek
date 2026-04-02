@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import BentoGrid from "@/components/BentoGrid";
 import TerminalUI from "@/components/TerminalUI";
 import ProjectSlider from "@/components/ProjectSlider";
+import Projects from "@/app/projects/page";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -73,7 +74,7 @@ export default function Home() {
           </h2>
         </div>
         
-        <ProjectSlider />
+        <Projects />
       </section>
 
       {/* 5. CONTACT SECTION - The "Protocol" */}
