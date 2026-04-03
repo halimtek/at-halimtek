@@ -15,7 +15,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 ${
+    <nav className={`fixed top-0 w-full z-[100] transition-all duration-0 ${
       scrolled || isOpen
         ? "h-16 bg-white/90 dark:bg-[#030712]/90 backdrop-blur-xl border-b border-blue-500/10 shadow-xl" 
         : "h-20 bg-transparent"
