@@ -36,6 +36,7 @@ export default function Navbar() {
           <Link href="/login" className="text-[10px] font-mono font-bold uppercase text-slate-500">Login</Link>
           <Link href="/register" className="px-5 py-2 bg-blue-600 text-white text-[10px] font-mono font-black uppercase rounded-lg shadow-lg shadow-blue-500/20">Join</Link>
         </div>
+         <ThemeToggle />
 
         {/* Mobile Toggle Button - Visible only on Mobile */}
         <div className="flex md:hidden items-center gap-4 z-[110]">
@@ -69,7 +70,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-       <ThemeToggle />
+      
     </nav>
   );
 }
